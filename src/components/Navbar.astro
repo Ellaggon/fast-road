@@ -1,0 +1,49 @@
+---
+// import { NavLink } from "react-router-dom";
+// import { AuthContext } from "../hooks/useContext";
+---
+
+<nav
+  class="flex justify-between items-center fixed top-2 left-4 z-10 w-[100%] py-2 pl-8 pr-10 lg:pr-20 shadow-2xl text-white bg-white bg-opacity-10 rounded-2xl"
+>
+  <h2 class="font-bold text-2xl">
+    <a href="/">Fastline</a>
+  </h2>
+  <ul class="flex gap-4">
+    {
+      (
+        <li class="py-1 rounded-lg border hover:border-cyan-800 px-3 hover:scale-110 active:bg-black">
+          <a href="/MyAccount">Mi cuenta</a>
+        </li>
+      )
+    }
+    {
+      (
+        <li class="py-1 rounded-lg border hover:border-cyan-800 px-3 hover:scale-110 active:bg-black">
+          <a href="/Posts">Posts</a>
+        </li>
+      )
+    }
+
+    <a href="/Login"><li class="py-1 hover:scale-110">Login</li></a>
+    {
+      (
+        <li class="py-1 hover:scale-110">
+          <a href="/Register">Register</a>
+        </li>
+      )
+    }
+    <li>
+      <button
+        class="font-bold rounded-lg shadow-md px-4 p-1 bg-yellow-600 border AxAZAAborder-gray-400 text-white hover:scale-110 hover:border-cyan-100 active:bg-yellow-800"
+      >
+        <a href="/PostPage">Publicar</a>
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<script>
+  // const Navbar = () => {
+  // const context = useContext(AuthContext);
+</script>

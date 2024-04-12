@@ -1,0 +1,104 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getSession } from "auth-astro/server"
+
+const { signIn, signOut } = await import("auth-astro/client")
+const session = await getSession(Astro.request)
+---
+
+<Layout title="Login">
+  <article class="max-w-[30rem] block mx-auto mt-32">
+    <h1 class="text-2xl font-bold mb-3 bg-gradient-to-r from-amber-600 to-pink-500 bg-clip-text text-transparent">
+      Ingresa con tu cuenta
+    </h1>
+    {
+      session ? (
+        <p class="text-white">Welcome {session.user?.name}</p>
+      ) : (
+        <p class="text-white">Not longer in</p>
+      )
+    }
+
+<!-- <form
+      class="grid grid-cols-2 gap-y-[2rem] gap-x-[1rem] my-10"
+    >
+      <input
+        type="text"
+        name="email"
+        placeholder="Email"
+        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
+        class="col-span-2 rounded-lg p-2"
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Contraseña"
+        class="col-span-2 rounded-lg p-2"
+      />
+      <input
+        type="submit"
+        name="submit"
+        value="INGRESAR"
+        class="col-span-2 rounded-lg p-2 m-10 bg-orange-500"
+      />
+    </form> -->
+  </article>
+  <div class="flex flex-col justify-center mt-20">
+    <button class="text-white" id="login">Login con Github</button>
+    <button class="alert text-white">Click me!</button>
+    <button class="text-white" id="logout">Logout</button>
+
+  </div>
+</Layout>
+
+
+<script>
+const buttons = document.querySelectorAll('button.alert');
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    alert('Button was clicked!');
+  });
+});
+
+export const obtener_localStorage = () => {
+  let nombre = localStorage.getItem("nombre");
+  let personaFromStorage = localStorage.getItem("persona");
+
+  if (personaFromStorage !== null) {
+    const persona = JSON.parse(personaFromStorage);
+    console.log("nombre", nombre);
+    console.log("persona", persona);
+  } else {
+    console.log("No hay entradas en local storage");
+  }
+}
+
+export function guardar_localStorage() {
+  let persona = {
+    nombre: "Fernando",
+    edad: 31,
+    correo: "algo",
+    coords: {
+      lat: 10,
+      Ing: -10,
+    },
+  };
+
+  let nombre = "Juan";
+
+  localStorage.setItem("nombre", nombre);
+  localStorage.setItem("persona", JSON.stringify(persona));
+  obtener_localStorage()
+}
+</script>
+
+<script>
+  import { $ } from "@/lib/dom-selector"
+  const { signIn, signOut } = await import("auth-astro/client")
+
+  const $login = $("#login")
+  const $logout = $("#logout")
+
+  $login.onclick = () => signIn()
+  $logout.onclick = () => signOut()
+</script>
